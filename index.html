@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="en-us">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Lotto Number Generator</title>
+		<!--[if lt IE 9]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<style>
+			html, body, div, span, applet, object, iframe,
+			h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+			a, abbr, acronym, address, big, cite, code,
+			del, dfn, em, img, ins, kbd, q, s, samp,
+			small, strike, strong, sub, sup, tt, var,
+			b, u, i, center,
+			dl, dt, dd, ol, ul, li,
+			fieldset, form, label, legend,
+			table, caption, tbody, tfoot, thead, tr, th, td,
+			article, aside, canvas, details, embed, 
+			figure, figcaption, footer, header, hgroup, 
+			menu, nav, output, ruby, section, summary,
+			time, mark, audio, video {
+				margin: 0;
+				padding: 0;
+				border: 0;
+				font-size: 100%;
+				font: inherit;
+				vertical-align: baseline;
+			}
+			
+			article, aside, details, figcaption, figure, 
+			footer, header, hgroup, main, menu, nav, section {
+				display: block;
+			}
+
+			body {
+				line-height: 1;
+			}
+
+			ol, ul {
+				list-style: none;
+			}
+
+			blockquote, q {
+				quotes: none;
+			}
+
+			blockquote:before, blockquote:after,
+			q:before, q:after {
+				content: '';
+				content: none;
+			}
+
+			table {
+				border-collapse: collapse;
+				border-spacing: 0;
+			}
+
+			html {
+				box-sizing: border-box;
+			}
+
+			*, *:before, *:after {
+				box-sizing: inherit;
+			}
+
+			img {
+				max-width: 100%;
+				height: auto;
+			}
+			
+			h1, 
+			legend, 
+			label,
+			option,
+			p,
+			span
+			.submitButton {
+				font-family: arial;
+			}
+			
+			.wrapper {
+				width: 960px;
+				margin: 0 auto;
+			}
+			
+			header {
+				margin-bottom: 50px;
+			}
+			
+			header h1 {
+				margin: 20px;
+				font-size: 2em;
+				font-weight: bold;
+				text-align: center;
+			}
+			
+			form {
+				overflow: auto;
+			}
+			
+			legend {
+				margin-right: 20px;
+				float: left;
+			}
+			
+			fieldset:first-child,
+			fieldset:nth-child(2) {
+				margin-bottom: 50px;
+			}
+			
+			fieldset:first-child legend {
+				margin-top: 5px;
+			}
+			
+			select {
+				width: 70px;
+				font-size: 1.2em;
+			}
+			
+			fieldset:nth-child(2) input {
+				margin-top: -10px;
+				width: 70px;
+				font-size: 1.2em;
+			}
+			
+			input[type="checkbox"] {
+				position: absolute;
+				top: -9999px;
+				left: -9999px;
+			}
+			
+			input[type="checkbox"] + label {
+				display: inline-block;
+				width: 80px;
+				height: 80px;
+				margin: 5px;
+				margin-bottom: 15px;
+				background-color: #fff;
+				background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 220, .2) 0%, transparent 100%);
+				background-image: -moz-linear-gradient(-45deg, rgba(255, 255, 220, .2) 0%, transparent 100%);
+				background-image: -o-linear-gradient(-45deg, rgba(255, 255, 220, .2) 0%, transparent 100%);
+				background-image: -ms-linear-gradient(-45deg, rgba(255, 255, 220, .2) 0%, transparent 100%);
+				border-radius: 50%;
+				box-shadow: inset -20px -20px 45px rgba(0, 0, 0, .2),
+								 0 25px 20px -15px rgba(0, 0, 0, .2);
+				font-family: 'Arial Black', 'Arial Bold', Gadget, sans-serif;
+				font-size: 1.2em;
+				text-align: center;
+				line-height: 80px;
+				-webkit-transition: all 0.2s;
+				   -moz-transition: all 0.2s;
+					 -o-transition: all 0.2s;
+						transition: all 0.2s;
+				cursor: pointer;
+			}
+			
+			input[type="checkbox"] + label:hover,
+			input[type="checkbox"] + label:focus,
+			input[type="checkbox"] + label:active {
+				box-shadow: inset -20px -20px 45px rgba(0, 0, 0, .6),
+								 0 25px 20px -15px rgba(0, 0, 0, .6);
+			}
+			
+			input[type="checkbox"]:checked + label {
+				background-color: rgba(255, 20, 20, .6);
+				box-shadow: inset -20px -20px 45px rgba(0, 0, 0, .6),
+								 0 25px 20px -15px rgba(0, 0, 0, .6);
+			}
+			
+			input[type="checkbox"]:disabled + label {
+				color: #ccc;
+			}
+			
+			input[type="checkbox"]:disabled + label:hover,
+			input[type="checkbox"]:disabled + label:focus,
+			input[type="checkbox"]:disabled + label:active {
+				box-shadow: inset -20px -20px 45px rgba(0, 0, 0, .2),
+								 0 25px 20px -15px rgba(0, 0, 0, .2);
+			}
+			
+			fieldset:last-of-type {
+				margin-bottom: 10px;
+			}
+			
+			fieldset:last-of-type legend {
+				float: none;
+				margin-bottom: 20px;
+			}
+			
+			#numberOfChecks {
+				margin-top: 20px;
+				margin-left: 20px;
+				float: left;
+			}
+			
+			#numberOfChecks p {
+				font-size: 1.2em;
+				font-weight: bold;
+				color: red;
+			}
+			
+			.submitButton {
+				padding: 10px;
+				float: right;
+				font-size: 2em;
+			}
+			
+			#finalResult > div.overlay {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-color:rgba(0,0,0,0.5);
+			}
+			
+			button.closeButton {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-color: transparent;
+				border-width: 0px;
+				border-style: none;
+				border-color: transparent;
+				cursor: pointer;
+			}
+			
+			#finalResult > div.numberContainer {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				margin-top: -200px;
+				margin-left: -200px;
+				padding: 20px;
+				width: 400px;
+				min-height: 400px;
+				background-color: #fff;
+				font-size: 1.2em;
+				border-width: 5px;
+				border-style: solid;
+				border-color: #ddd;
+			}
+			
+			button.smallCloseButton {
+				position: absolute;
+				top: 0;
+				right: 0;
+				padding-top: 15px;
+				padding-bottom: 15px;
+				background-color: transparent;
+				border-width: 0px;
+				border-style: none;
+				border-color: transparent;
+				-webkit-transition: background-color 0.3s;
+				   -moz-transition: background-color 0.3s;
+					 -o-transition: background-color 0.3s;
+						transition: background-color 0.3s;
+				cursor: pointer;
+			}
+			
+			button.smallCloseButton:hover,
+			button.smallCloseButton:focus,
+			button.smallCloseButton:active {
+				background-color: #ccc;
+			}
+			
+			div.numberContainer p {
+				margin-bottom: 1em;
+			}
+			
+			div.numberContainer p:last-child {
+				margin-bottom: 0;
+			}
+			
+			div.numberContainer span {
+				display: inline-block;
+				width: 30px;
+				height: 30px;
+				margin-right: 10px;
+				text-align: center;
+				line-height: 30px;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<div class="wrapper">
+			<header>
+				<h1>Lotto Number Generator</h1>
+			</header>
+
+			<main>
+				<section>
+					<form method="post">
+						<fieldset>
+							<legend>How many numbers you wanna use?</legend>
+							<select id="numberLimit" onchange="selectForm(this)">
+								<option value="use10" selected>10</option>
+								<option value="use15">15</option>
+								<option value="use20">20</option>
+								<option value="use25">25</option>
+								<option value="use30">30</option>
+								<option value="use35">35</option>
+								<option value="use40">40</option>
+								<option value="use45">45</option>
+								<option value="use49">49</option>
+							</select>
+						</fieldset>
+						
+						<fieldset>
+							<legend>How many sets of lotto number?</legend>
+							<input type="number" name="set" value="5">
+						</fieldset>
+					
+						<fieldset>
+							<legend>Pick <span id="displayNumber"></span> numbers between 1 and 49.</legend>
+							<input type="checkbox" name="number" value="number1" id="number1" onclick="checkedBox(this)">
+							<label for="number1">1</label>
+							<input type="checkbox" name="number" value="number2" id="number2" onclick="checkedBox(this)">
+							<label for="number2">2</label>
+							<input type="checkbox" name="number" value="number3" id="number3" onclick="checkedBox(this)">
+							<label for="number3">3</label>
+							<input type="checkbox" name="number" value="number4" id="number4" onclick="checkedBox(this)">
+							<label for="number4">4</label>
+							<input type="checkbox" name="number" value="number5" id="number5" onclick="checkedBox(this)">
+							<label for="number5">5</label>
+							<input type="checkbox" name="number" value="number6" id="number6" onclick="checkedBox(this)">
+							<label for="number6">6</label>
+							<input type="checkbox" name="number" value="number7" id="number7" onclick="checkedBox(this)">
+							<label for="number7">7</label>
+							<input type="checkbox" name="number" value="number8" id="number8" onclick="checkedBox(this)">
+							<label for="number8">8</label>
+							<input type="checkbox" name="number" value="number9" id="number9" onclick="checkedBox(this)">
+							<label for="number9">9</label>
+							<input type="checkbox" name="number" value="number10" id="number10" onclick="checkedBox(this)">
+							<label for="number10">10</label>
+							<input type="checkbox" name="number" value="number11" id="number11" onclick="checkedBox(this)">
+							<label for="number11">11</label>
+							<input type="checkbox" name="number" value="number12" id="number12" onclick="checkedBox(this)">
+							<label for="number12">12</label>
+							<input type="checkbox" name="number" value="number13" id="number13" onclick="checkedBox(this)">
+							<label for="number13">13</label>
+							<input type="checkbox" name="number" value="number14" id="number14" onclick="checkedBox(this)">
+							<label for="number14">14</label>
+							<input type="checkbox" name="number" value="number15" id="number15" onclick="checkedBox(this)">
+							<label for="number15">15</label>
+							<input type="checkbox" name="number" value="number16" id="number16" onclick="checkedBox(this)">
+							<label for="number16">16</label>
+							<input type="checkbox" name="number" value="number17" id="number17" onclick="checkedBox(this)">
+							<label for="number17">17</label>
+							<input type="checkbox" name="number" value="number18" id="number18" onclick="checkedBox(this)">
+							<label for="number18">18</label>
+							<input type="checkbox" name="number" value="number19" id="number19" onclick="checkedBox(this)">
+							<label for="number19">19</label>
+							<input type="checkbox" name="number" value="number20" id="number20" onclick="checkedBox(this)">
+							<label for="number20">20</label>
+							<input type="checkbox" name="number" value="number21" id="number21" onclick="checkedBox(this)">
+							<label for="number21">21</label>
+							<input type="checkbox" name="number" value="number22" id="number22" onclick="checkedBox(this)">
+							<label for="number22">22</label>
+							<input type="checkbox" name="number" value="number23" id="number23" onclick="checkedBox(this)">
+							<label for="number23">23</label>
+							<input type="checkbox" name="number" value="number24" id="number24" onclick="checkedBox(this)">
+							<label for="number24">24</label>
+							<input type="checkbox" name="number" value="number25" id="number25" onclick="checkedBox(this)">
+							<label for="number25">25</label>
+							<input type="checkbox" name="number" value="number26" id="number26" onclick="checkedBox(this)">
+							<label for="number26">26</label>
+							<input type="checkbox" name="number" value="number27" id="number27" onclick="checkedBox(this)">
+							<label for="number27">27</label>
+							<input type="checkbox" name="number" value="number28" id="number28" onclick="checkedBox(this)">
+							<label for="number28">28</label>
+							<input type="checkbox" name="number" value="number29" id="number29" onclick="checkedBox(this)">
+							<label for="number29">29</label>
+							<input type="checkbox" name="number" value="number30" id="number30" onclick="checkedBox(this)">
+							<label for="number30">30</label>
+							<input type="checkbox" name="number" value="number31" id="number31" onclick="checkedBox(this)">
+							<label for="number31">31</label>
+							<input type="checkbox" name="number" value="number32" id="number32" onclick="checkedBox(this)">
+							<label for="number32">32</label>
+							<input type="checkbox" name="number" value="number33" id="number33" onclick="checkedBox(this)">
+							<label for="number33">33</label>
+							<input type="checkbox" name="number" value="number34" id="number34" onclick="checkedBox(this)">
+							<label for="number34">34</label>
+							<input type="checkbox" name="number" value="number35" id="number35" onclick="checkedBox(this)">
+							<label for="number35">35</label>
+							<input type="checkbox" name="number" value="number36" id="number36" onclick="checkedBox(this)">
+							<label for="number36">36</label>
+							<input type="checkbox" name="number" value="number37" id="number37" onclick="checkedBox(this)">
+							<label for="number37">37</label>
+							<input type="checkbox" name="number" value="number38" id="number38" onclick="checkedBox(this)">
+							<label for="number38">38</label>
+							<input type="checkbox" name="number" value="number39" id="number39" onclick="checkedBox(this)">
+							<label for="number39">39</label>
+							<input type="checkbox" name="number" value="number40" id="number40" onclick="checkedBox(this)">
+							<label for="number40">40</label>
+							<input type="checkbox" name="number" value="number41" id="number41" onclick="checkedBox(this)">
+							<label for="number41">41</label>
+							<input type="checkbox" name="number" value="number42" id="number42" onclick="checkedBox(this)">
+							<label for="number42">42</label>
+							<input type="checkbox" name="number" value="number43" id="number43" onclick="checkedBox(this)">
+							<label for="number43">43</label>
+							<input type="checkbox" name="number" value="number44" id="number44" onclick="checkedBox(this)">
+							<label for="number44">44</label>
+							<input type="checkbox" name="number" value="number45" id="number45" onclick="checkedBox(this)">
+							<label for="number45">45</label>
+							<input type="checkbox" name="number" value="number46" id="number46" onclick="checkedBox(this)">
+							<label for="number46">46</label>
+							<input type="checkbox" name="number" value="number47" id="number47" onclick="checkedBox(this)">
+							<label for="number47">47</label>
+							<input type="checkbox" name="number" value="number48" id="number48" onclick="checkedBox(this)">
+							<label for="number48">48</label>
+							<input type="checkbox" name="number" value="number49" id="number49" onclick="checkedBox(this)">
+							<label for="number49">49</label>
+						</fieldset>
+						
+						<div id="numberOfChecks">
+						</div>
+						
+						<input type="submit" name="submit" value="Generate" class="submitButton" id="generateButton">
+					</form>
+
+					<div id="finalResult">
+					</div>
+				</section>
+			</main>
+
+			<footer>
+				
+			</footer>
+		</div>
+		
+		<script>
+			var numSelect = document.getElementById( 'numberLimit' );
+			var displayingLimit = document.getElementById( 'displayNumber' );
+			var initialValue = numSelect[0].value;
+			var firstValue = initialValue.split( 'use' );
+			var genLimit = firstValue[1];
+			displayingLimit.innerHTML = ( genLimit );
+
+			function selectForm( selected ){
+				reset();
+				var numSelect = document.getElementById( 'numberLimit' );
+				var numOption = numSelect.selectedIndex;
+				var selectedOption = selected.options[ numOption ].value;
+				
+				var desiredValue = selectedOption.split( 'use' );
+				var getNumber = desiredValue[1];
+				
+				genLimit = parseInt( getNumber );
+				displayingLimit.innerHTML = ( genLimit );
+				
+				if( genLimit == 49 ){
+					var everyCheckbox = document.querySelectorAll( 'input[type="checkbox"]' );
+					var numberEveryBox = everyCheckbox.length;
+					var a = 0;
+				
+					while( a < numberEveryBox ){
+						everyCheckbox[a].checked = true;
+						a++;
+					}
+					
+					submitButton.disabled = false;
+					numCount.innerHTML = ( '<p>49 Selected</p>' );
+				}
+			}
+			
+			var numCount = document.getElementById( 'numberOfChecks' );
+			var disableCheckbox = false;
+			
+			function checkedBox( checkbox ){
+				var checked = document.querySelectorAll( 'input[type="checkbox"]:checked' );
+				var unchecked = document.querySelectorAll( 'input[type="checkbox"]:not(:checked)' );
+				var numChecked = checked.length;
+				var numUnchecked = unchecked.length;
+				var i = 0;
+				
+				numCount.innerHTML = ( '<p>' + numChecked + ' Selected</p>' );
+				displayResult.innerHTML = ( '' );
+				
+				if( disableCheckbox == true ){
+					disableCheckbox = false;
+					
+					while( i < numUnchecked ){
+						unchecked[i].disabled = false;
+						i++;
+					}
+				}
+				
+				if( numChecked == genLimit ){
+					disableCheckbox = true;
+					submitButton.disabled = false;
+
+					while( i < numUnchecked ){
+						unchecked[i].disabled = true;
+						i++;
+					}
+				}
+			}
+
+			function shuffle(a){
+				for(var j, x, i = a.length; i; j = Math.floor( Math.random() * i ), x = a[--i], a[i] = a[j], a[j] = x);
+				return a;
+			};
+			
+			function reset(){
+				var everyCheckbox = document.querySelectorAll( 'input[type="checkbox"]' );
+				var numberEveryBox = everyCheckbox.length;
+				var r = 0;
+				
+				while( r < numberEveryBox ){
+					everyCheckbox[r].checked = false;
+					everyCheckbox[r].disabled = false;
+					r++;
+				}
+				
+				disableCheckbox = false;
+				numCount.innerHTML = ( '' );
+				displayResult.innerHTML = ( '' );
+			}
+			
+			function selectReset(){
+				displayResult.innerHTML=( '' );
+				
+				var selectResult = numSelect.length;
+				for( i = 0; i < selectResult; i++ ){
+					numSelect[i].selected = numSelect[i].defaultSelected;
+				}
+				
+				genLimit = 10;
+			}
+			
+			var checkedNumbers = document.getElementsByName( 'number' );
+			var numberOfSets = document.getElementsByName( 'set' );
+			var submitButton = document.getElementById( 'generateButton' );
+			var displayResult = document.getElementById( 'finalResult' );
+			var numbers=[];
+			
+			submitButton.disabled = true;
+
+			function generateNumbers(e){
+				e.preventDefault();
+				submitButton.disabled = true;
+				displayResult.innerHTML = ( '' );
+				numbers.length = 0;
+				var total = checkedNumbers.length;
+
+				for( i = 0; i < total; i++ ){
+					if( checkedNumbers[i].type == 'checkbox' && checkedNumbers[i].checked == true ){
+						var initialValue = checkedNumbers[i].value;
+						var targetValue = initialValue.split( 'number' );
+						var getNumber = targetValue[1];
+						var number = parseInt( getNumber );
+						
+						numbers.push( number );
+					}
+				}
+				
+				reset();
+				
+				var lotto = [];
+				var numSet = numberOfSets[0].value;
+				var l = 0;
+				var lottoNumbers = '';
+				
+				displayResult.innerHTML = ( '<div class="overlay"><button class="closeButton" onclick="selectReset()"></button></div>' );
+				
+				while( l < numSet ){
+					lotto.length = 0;
+					for( s = 0; s < 7; s++ ){
+						shuffle( numbers );
+					}
+					for( i = 0; i < 6; i++ ){
+						lotto.push( numbers[i] );
+					}
+					lotto.sort( function(a, b){
+						return a-b
+					});
+					lottoNumbers += ( '<p><span>' + lotto[0] + '</span> <span>' + lotto[1] + '</span> <span>' + lotto[2] + '</span> <span>' + lotto[3] + '</span> <span>' + lotto[4] + '</span> <span>' + lotto[5] + '</span></p>' );
+					l++;
+				}
+				
+				displayResult.innerHTML += ( '<div class="numberContainer" id="container"><button class="smallCloseButton" onclick="selectReset()">Close [x]</button>'+ lottoNumbers +'</div>' );
+				
+				var screenHeight = screen.height;
+				var container = document.getElementById( 'container' );
+				var divHeight = container.offsetHeight;
+				
+				if( divHeight >= screenHeight ){
+					container.style.top = 0;
+					container.style.marginTop = 0;
+				}else if( divHeight > 400 ){
+					var divMarginTop = divHeight / 2;
+					container.style.marginTop = '-' + divMarginTop + 'px' ;
+				}
+			}
+			submitButton.addEventListener( 'click', generateNumbers, true );
+		</script>
+	</body>
+</html>
